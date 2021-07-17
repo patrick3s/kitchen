@@ -14,8 +14,9 @@ class Confirmation extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Material(
       child: Container(
+        color: Colors.white,
         padding: EdgeInsets.all(10),
-        height: size.height * .55,
+        height: size.height * .7,
         child: Column(
           children: [
             Center(
@@ -56,7 +57,26 @@ class Confirmation extends StatelessWidget {
               fontWeight: FontWeight.bold
             ),
             ),
-            Expanded(child: Container()),
+            Expanded(child: StreamBuilder<OrderState>(
+              stream: presenter.controller.blocOrder.stream,
+              builder: (context, snapshot) {
+                if(snapshot.data is LoadingOrder){
+                    return LayoutBuilder(
+
+                      builder: (context, constraints) {
+                        return Container(
+                          height: constraints.maxHeight * .9,
+                          width: constraints.maxHeight * .9,
+                          child: Image.asset('assets/loading.gif',
+                          fit: BoxFit.cover,
+                          ),
+                        );
+                      }
+                    );
+                  }
+                return Container();
+              }
+            )),
             Container(
               height: size.height * .06,
               width: size.width,

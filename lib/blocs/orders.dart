@@ -32,6 +32,7 @@ class BlocOrder {
   Future<OrderState> create(Order order)async{
     OrderState state;
     _controller.add(LoadingOrder());
+    await Future.delayed(Duration(seconds: 2));
     final result = await usecase.create(order);
     result.fold((l) {
       state = SuccessOrderWrite(l);

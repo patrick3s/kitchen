@@ -7,6 +7,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:multidelivery/app/app_widget.dart';
 import 'package:multidelivery/app/views/cart/cart.dart';
 import 'package:multidelivery/app/views/cart_confirmation/cart_confirmation.dart';
+import 'package:multidelivery/app/views/evaluation/evaluation.dart';
 import 'package:multidelivery/app/views/order/order.dart';
 import 'package:multidelivery/app/views/partner_evaluation/partner_evaluation.dart';
 import 'package:multidelivery/app/views/product/product.dart';
@@ -49,7 +50,8 @@ class AppModule extends MainModule {
     ModularRouter('/partner_evaluation',child: (_,args) => PartnerEvaluation(partner: args.data,)),
     ModularRouter('/product',child: (_,args) => ProductDetail(product: args.data,)),
     ModularRouter('/webview',child:(_,args) => WebViewPage()),
-    ModularRouter('/order',child: (_,args) => OrderView(map:args.data))
+    ModularRouter('/order',child: (_,args) => OrderView(map:args.data)),
+    ModularRouter('/evaluation',child:(_,args) => EvaluationView(order: args.data,))
   ];
   static Inject get to => Inject<AppModule>();
 

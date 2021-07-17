@@ -13,11 +13,14 @@ class ProductsOrder extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Pedido id ${order.id}',
-          style: TextStyle(
-            fontSize: size.width * .045,
-            fontWeight: FontWeight.bold
-          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Pedido id ${order.id}',
+            style: TextStyle(
+              fontSize: size.width * .045,
+              fontWeight: FontWeight.bold
+            ),
+            ),
           ),
           Divider(),
           ...order.products.map((product) => Column(children: [

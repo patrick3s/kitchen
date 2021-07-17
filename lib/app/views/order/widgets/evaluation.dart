@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:multidelivery/shared/icons_platform.dart';
 import 'package:multidelivery/src/infra/models/order.dart';
 import 'package:multidelivery/utils/models.dart';
@@ -9,7 +10,7 @@ class EvaluationOrders extends StatelessWidget {
   const EvaluationOrders({Key key, this.order, this.size}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25, horizontal: 8),
       color:  Colors.grey.withOpacity(.15),
@@ -20,7 +21,7 @@ class EvaluationOrders extends StatelessWidget {
           child: order.status == lastStatus
               ? InkWell(
                   onTap: () {
-                    // show avaliar
+                    Modular.to.pushNamed('evaluation',arguments:  order);
                   },
                   child: Center(
                     child: Row(
@@ -30,7 +31,7 @@ class EvaluationOrders extends StatelessWidget {
                         color: Colors.orange,
                         ),
                         Text(
-                          'Avaliar',
+                          'Clique aqui para Avaliar',
                           style: TextStyle(fontSize: size.width * .05),
                         ),
                       ],

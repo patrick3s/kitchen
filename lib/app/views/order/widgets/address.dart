@@ -28,6 +28,7 @@ class AddressOrder extends StatelessWidget {
 
   _partner(Order order){
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("${order.partner.street},${order.partner.numberHome} - ${order.partner.complement}",
         style: TextStyle(

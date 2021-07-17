@@ -6,22 +6,25 @@ import 'package:intl/intl.dart';
 import 'package:multidelivery/src/domain/entities/evaluation.dart';
 
 class Evaluation extends ResultEvaluation {
-  final String id;
-  final String partnerId;
-  final DateTime createAt;
-  final String createAtFormat;
-  final String comment;
-  final double averange;
-  final String userId;
-  final String aswer;
-  final String name;
+  String id;
+  String partnerId;
+  DateTime createAt;
+  String createAtFormat;
+  String comment;
+  double averange;
+  String userId;
+  String aswer;
+  String orderId;
+  String name;
   Evaluation({this.id, this.partnerId, 
   this.name,
+  this.orderId,
   this.createAt, this.createAtFormat, this.comment, this.averange, this.userId, this.aswer});
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'orderId':orderId,
       'partnerId': partnerId,
       'createAt': createAt.millisecondsSinceEpoch,
       'createAtFormat': createAtFormat,
@@ -40,6 +43,7 @@ class Evaluation extends ResultEvaluation {
       id: map['id'],
       partnerId: map['partnerId'],
       createAt:date,
+      orderId: map['orderId'],
       name: map['name'],
       createAtFormat: formatDate.format(date),
       comment: map['comment'],

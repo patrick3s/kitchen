@@ -34,15 +34,15 @@ class BlocEvaluation {
         (r) => _controller.add(ErrorEvaluation(r)));
   }
 
-  Future<bool> create(Map<String, dynamic> evaluation) async {
+  Future<EvaluationState> create(Map<String, dynamic> evaluation) async {
     _controller.add(LoadingEvaluation());
     final result = await usecaseEvaluation.create(evaluation);
     return result.fold((l) {
       _controller.add(SuccessEvaluation());
-      return true;
+      return SuccessEvaluation();
     }, (r) {
       _controller.add(ErrorEvaluation(r));
-      return false;
+      return ErrorEvaluation(r);
     });
   }
 

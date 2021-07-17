@@ -144,7 +144,9 @@ class OrderTile extends StatelessWidget {
                                 mainAxisAlignment:order.statusDoneForVote() ?  MainAxisAlignment.spaceAround : MainAxisAlignment.center,
                                 children: [
                                   order.statusDoneForVote() ? InkWell(
-                                    onTap: (){},
+                                    onTap: (){
+                                      Modular.to.pushNamed('evaluation',arguments: order);
+                                    },
                                     child: Text('Avaliar',
                                     style: TextStyle(
                                       fontSize: size.width * .045,
