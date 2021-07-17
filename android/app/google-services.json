@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "418579369479",
+    "project_id": "mutidelivery-38d7e",
+    "storage_bucket": "mutidelivery-38d7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418579369479:android:7dcde1be49bb14fc7824a2",
+        "android_client_info": {
+          "package_name": "com.example.multidelivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418579369479-ct20eis3611mnn10kc4k1egak39vthuq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWra6SRMDjZOetSSaX-cbENeEc22Bg9AY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418579369479-ct20eis3611mnn10kc4k1egak39vthuq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
