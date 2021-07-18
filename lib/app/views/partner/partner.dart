@@ -9,6 +9,7 @@ import 'package:multidelivery/app/views/partner/widgets/tab_bar.dart';
 
 
 import 'package:multidelivery/blocs/products.dart';
+import 'package:multidelivery/blocs/usermodel.dart';
 import 'package:multidelivery/controllers/partner.dart';
 import 'package:multidelivery/presenters/partner.dart';
 import 'package:multidelivery/shared/auth/auth_user.dart';
@@ -17,6 +18,7 @@ import 'package:multidelivery/shared/config.dart';
 import 'package:multidelivery/src/externals/core.dart';
 
 import 'package:multidelivery/src/infra/models/partner.dart' as pt;
+import 'package:multidelivery/utils/common_widgets.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 
@@ -44,7 +46,8 @@ class _PartnerState extends State<Partner> implements PartnerContract{
     );
     presenter = PartnerPresenter(
       this,
-      PartnerController(widget.partner)
+      PartnerController(widget.partner,AppModule.to<BlocUsermodel>(),
+      AppModule.to<AuthUser>())
     );
   }
 
@@ -105,5 +108,10 @@ class _PartnerState extends State<Partner> implements PartnerContract{
     setState(() {
       
     });
+  }
+
+  @override
+  notification(String text) {
+    notificationPopup('Atenção', text);
   }
 }

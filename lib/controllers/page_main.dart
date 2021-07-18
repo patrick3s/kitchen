@@ -43,6 +43,7 @@ class MainController {
     }else{
       _createAnimPageOffers();
     }
+    
   }
   _createAnimPageOffers(){
      timer = Timer.periodic(Duration(seconds:7), (timer){
@@ -57,7 +58,7 @@ class MainController {
       });
   }
   dispose(){
-    timer.cancel();
+   timer.cancel();
   }
 
   List<Partner> getPartners(){

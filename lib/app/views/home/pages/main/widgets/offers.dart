@@ -46,11 +46,14 @@ class Offers extends StatelessWidget {
             if(snapshot.data is SuccessOffers){
                presenter.controller.offers = (snapshot.data as SuccessOffers).list;
               if(presenter.controller.offers.isEmpty) return Container();
+              currentId.value = '';
               presenter.controller.startAnimationOffers();
+              
               return Container(
                 height: size.height * .25,
                 width: double.infinity,
                 child: PageView.builder(
+                  
                   controller: presenter.controller.pageControllerOffers,
                   itemCount: presenter.controller.offers.length,
                   onPageChanged: (page){

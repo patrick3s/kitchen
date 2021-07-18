@@ -1,11 +1,13 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:multidelivery/app/app_module.dart';
 import 'package:multidelivery/app/views/home/pages/main/widgets/partners.dart';
 import 'package:multidelivery/blocs/category.dart';
+import 'package:multidelivery/blocs/usermodel.dart';
 import 'package:multidelivery/controllers/page_main.dart';
-import 'package:multidelivery/app/views/home/pages/main/widgets/delegate.dart';
 import 'package:multidelivery/presenters/page_main.dart';
 import 'package:multidelivery/app/views/home/pages/main/widgets/offers.dart';
 import 'package:multidelivery/app/views/home/pages/main/widgets/tabs_main.dart';
@@ -37,8 +39,7 @@ class _MainState extends State<Main> implements MainContract  {
   void initState() {
     super.initState();
     _blocPartners = AppModule.to<BlocPartners>();
-    _blocOffers = BlocOffers(AppModule.to<AuthUser>(),
-    AppModule.to<CoreImpl>().usecaseOffers());
+    _blocOffers = AppModule.to<BlocOffers>();
     _blocCategory = BlocCategory(AppModule.to<CoreImpl>().usecaseCategory());
     presenter = MainPresenter(
       this,
@@ -50,12 +51,12 @@ class _MainState extends State<Main> implements MainContract  {
   @override
   void dispose() {
     AppModule.to<Config>().showLog('Main Page destruida');
-    presenter.controller.dispose();
-    _blocOffers.dispose();
-    _blocPartners.dispose();
+    
+
+
     _blocCategory.dispose();
     super.dispose();
-    
+    presenter.controller.dispose();
   }
   @override
   void didChangeDependencies() {
@@ -85,7 +86,7 @@ class _MainState extends State<Main> implements MainContract  {
                 },
                 child: ListView(
                   children: [
-                    _search(),
+
                     TabsMain(
                       styleText: styleText,
                       presenter: presenter,
@@ -112,88 +113,76 @@ class _MainState extends State<Main> implements MainContract  {
   _appBar(){
     final height =AppBar().preferredSize.height;
     return Container(
-      
       width: double.infinity,
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(IconsPlatform.editLocation,
-              color: Colors.black,
+      child: StreamBuilder<UserModelState>(
+        stream: AppModule.to<BlocUsermodel>().stream,
+        builder: (context, snapshot) {
+          if(snapshot.data is LoadingUserModel){
+            return Center(
+              child: SpinKitThreeBounce(color: Colors.deepOrange,
+              size: size.width * .05
               ),
-              Expanded(child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal:35.0),
-                child: LayoutBuilder(
-                  builder: (context, constrains) {
-                    return Container(
-                      height: height,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 6,
-                        horizontal: 15),
-                      width: constrains.maxWidth,
-                      alignment: Alignment.center,
-                      child: AutoSizeText(
-                        "${presenter.controller.authUser.userModel.address['city']}-${presenter.controller.authUser.userModel.address['uf']}",
-                      style: styleText.copyWith(
-                        fontSize: size.width * .05,
-                        fontWeight: FontWeight.bold
-                      ),
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.black12,
-                        borderRadius: BorderRadius.all(Radius.circular(30))
-                      ),
-                    );
-                  }
-                ),
-              )),
-              Icon(IconsPlatform.favorite)
-            ],
-          ),
-      
-        ],
-      ),
-    );
-  }
-
-  _search(){
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: InkWell(
-        onTap: (){
-          showSearch(context: context, delegate: CustomSearchDelegate());
-        },
-        child: Container(
-          height: 56,
-          padding: EdgeInsets.symmetric(horizontal: 8),
-          decoration: BoxDecoration(
-            color: Colors.blueGrey.withOpacity(.4), 
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(0,0),
-                color: Colors.deepOrange.withOpacity(.4),
-                blurRadius: 3,
-                spreadRadius: 1
-              )
-            ],
-            borderRadius: BorderRadius.all(Radius.circular(30))
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            );
+          }
+          return Column(
             children: [
-              Icon(IconsPlatform.search),
-              Text('Onde quer comer hoje?',style: styleText.copyWith(
-                fontWeight: FontWeight.bold,
-                fontSize: size.width * .04
-              ),),
-              Container()
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Modular.to.pushNamed('address');
+                    },
+                    child: Icon(IconsPlatform.editLocation,
+                    color: Colors.black,
+                    ),
+                  ),
+                  Expanded(child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal:35.0),
+                    child: LayoutBuilder(
+                      builder: (context, constrains) {
+                        return InkWell(
+                          onTap: (){
+                            Modular.to.pushNamed('address');
+                          },
+                          child: Container(
+                            height: height,
+                            padding: EdgeInsets.symmetric(
+                              vertical: 6,
+                              horizontal: 15),
+                            width: constrains.maxWidth,
+                            alignment: Alignment.center,
+                            child: AutoSizeText(
+                              "${presenter.controller.authUser.userModel.address['city']}-${presenter.controller.authUser.userModel.address['uf']}",
+                            style: styleText.copyWith(
+                              fontSize: size.width * .05,
+                              fontWeight: FontWeight.bold
+                            ),
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.black12,
+                              borderRadius: BorderRadius.all(Radius.circular(30))
+                            ),
+                          ),
+                        );
+                      }
+                    ),
+                  )),
+                  InkWell(
+                    onTap: (){
+                      Modular.to.pushNamed('favorites');
+                    },
+                    child: Icon(IconsPlatform.favorite))
+                ],
+              ),
+          
             ],
-          ),
-        ),
+          );
+        }
       ),
     );
   }
 
+  
   
 }

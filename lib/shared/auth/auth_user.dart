@@ -40,8 +40,6 @@ class AuthUser {
     await _googleSign.signout();
     await _facebook.singout();
     status.value = STATUSUSER.UNLOGGED;
-    
-
   }
   signinGoogle()async{
     status.value = STATUSUSER.LOADING;
@@ -187,6 +185,7 @@ class AuthUser {
       if(doc.exists){
         final  _usermodel = UserModel.fromMap(doc.data());
         userModel = _usermodel;
+        userModel.id = user.uid;
         await _saveToken();
         status.value = STATUSUSER.LOGGED;
         config.showLog('Dados do usuario obtido');

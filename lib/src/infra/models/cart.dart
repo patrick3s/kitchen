@@ -35,12 +35,14 @@ class CartModel {
   }
   clearCart(){
     isEmpty =true;
+    quantityItems.value = 0;
     order = Order(products: [],
     formPayment: null
     );
   }
   removeProduct(Product product){
     order.products.remove(product);
+    
     if(order.products.isEmpty){
       clearCart();
       return;

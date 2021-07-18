@@ -113,29 +113,32 @@ class _CartConfirmationState extends State<CartConfirmation> implements CartConf
                         )
                       ]else ...[
                         ...presenter.controller.cart.order.partner.credit.map((e) => 
-                        InkWell(
-                          onTap: (){
-                            state.didChange(FormPayment(
-                              name: 'cartão de crédito',
-                              type: 'credit',
-                              title: e,
-                              notThing: true
-                            ));
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children:[
-                              Icon(IconsPlatform.credit,
-                              size: state.value?.title == e ? size.width * .05 : size.width * .04,
-                                color: state.value?.title == e ? Colors.deepOrange : Colors.grey
-                              ),
-                              Text(e,
-                              style: TextStyle(
-                                fontSize: state.value?.title == e ? size.width * .05 : size.width * .04,
-                                color: state.value?.title == e ? Colors.deepOrange : Colors.grey
-                              ),
-                              )
-                            ]
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            onTap: (){
+                              state.didChange(FormPayment(
+                                name: 'cartão de crédito',
+                                type: 'credit',
+                                title: e,
+                                notThing: true
+                              ));
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children:[
+                                Icon(IconsPlatform.credit,
+                                size: state.value?.title == e ? size.width * .05 : size.width * .04,
+                                  color: state.value?.title == e ? Colors.deepOrange : Colors.grey
+                                ),
+                                Text(e,
+                                style: TextStyle(
+                                  fontSize: state.value?.title == e ? size.width * .05 : size.width * .04,
+                                  color: state.value?.title == e ? Colors.deepOrange : Colors.grey
+                                ),
+                                )
+                              ]
+                            ),
                           ),
                         )
                         ).toList()
@@ -156,29 +159,32 @@ class _CartConfirmationState extends State<CartConfirmation> implements CartConf
                         )
                       ]else ...[
                         ...presenter.controller.cart.order.partner.debit.map((e) => 
-                        InkWell(
-                          onTap: (){
-                            state.didChange(FormPayment(
-                              name: 'cartão de débito',
-                              type: 'debit',
-                              title: e,
-                              notThing: true
-                            ));
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children:[
-                              Icon(IconsPlatform.credit,
-                              size: state.value?.title == e ? size.width * .05 : size.width * .04,
-                                color: state.value?.title == e ? Colors.deepOrange : Colors.grey
-                              ),
-                              Text(e,
-                              style: TextStyle(
-                                fontSize: state.value?.title == e ? size.width * .05 : size.width * .04,
-                                color: state.value?.title == e ? Colors.deepOrange : Colors.grey
-                              ),
-                              )
-                            ]
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            onTap: (){
+                              state.didChange(FormPayment(
+                                name: 'cartão de débito',
+                                type: 'debit',
+                                title: e,
+                                notThing: true
+                              ));
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children:[
+                                Icon(IconsPlatform.credit,
+                                size: state.value?.title == e ? size.width * .05 : size.width * .04,
+                                  color: state.value?.title == e ? Colors.deepOrange : Colors.grey
+                                ),
+                                Text(e,
+                                style: TextStyle(
+                                  fontSize: state.value?.title == e ? size.width * .05 : size.width * .04,
+                                  color: state.value?.title == e ? Colors.deepOrange : Colors.grey
+                                ),
+                                )
+                              ]
+                            ),
                           ),
                         )
                         ).toList()

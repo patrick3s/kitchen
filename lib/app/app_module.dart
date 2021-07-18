@@ -5,15 +5,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:multidelivery/app/app_widget.dart';
+import 'package:multidelivery/app/views/add_address/add_address.dart';
+import 'package:multidelivery/app/views/address/address.dart';
 import 'package:multidelivery/app/views/cart/cart.dart';
 import 'package:multidelivery/app/views/cart_confirmation/cart_confirmation.dart';
 import 'package:multidelivery/app/views/evaluation/evaluation.dart';
+import 'package:multidelivery/app/views/favorites/favorites.dart';
 import 'package:multidelivery/app/views/order/order.dart';
 import 'package:multidelivery/app/views/partner_evaluation/partner_evaluation.dart';
 import 'package:multidelivery/app/views/product/product.dart';
 import 'package:multidelivery/app/views/webview/webview.dart';
+import 'package:multidelivery/blocs/offers.dart';
 import 'package:multidelivery/blocs/orders.dart';
 import 'package:multidelivery/blocs/partners.dart';
+import 'package:multidelivery/blocs/usermodel.dart';
 import 'package:multidelivery/resources/fcm.dart';
 import 'package:multidelivery/shared/home_navigator.dart';
 import 'package:multidelivery/app/views/partner/partner.dart';
@@ -37,7 +42,10 @@ class AppModule extends MainModule {
     Bind((i) => CartModel()),
     Bind((i) => AuthUser(i<Config>())),
     Bind((i) => BlocPartners(i<AuthUser>(), i<CoreImpl>().usecasePartners())),
-    Bind((i) => BlocOrder(i<CoreImpl>().useCaseOrdersImpl(),i<AuthUser>()))
+    Bind((i) => BlocOrder(i<CoreImpl>().useCaseOrdersImpl(),i<AuthUser>())),
+    Bind((i) => BlocUsermodel(i<AuthUser>(),i<CoreImpl>().usecaseUserModel())),
+    Bind((i) => BlocOffers(i<AuthUser>(),
+    i<CoreImpl>().usecaseOffers()))
   ];
   @override 
   List<ModularRouter> routers = [
@@ -51,7 +59,10 @@ class AppModule extends MainModule {
     ModularRouter('/product',child: (_,args) => ProductDetail(product: args.data,)),
     ModularRouter('/webview',child:(_,args) => WebViewPage()),
     ModularRouter('/order',child: (_,args) => OrderView(map:args.data)),
-    ModularRouter('/evaluation',child:(_,args) => EvaluationView(order: args.data,))
+    ModularRouter('/evaluation',child:(_,args) => EvaluationView(order: args.data,)),
+    ModularRouter('/favorites',child:(_,args) => Favorites()),
+    ModularRouter('/address',child: (_,args) => AddressView()),
+    ModularRouter('/add_address',child: (_,args) => AddAddress())
   ];
   static Inject get to => Inject<AppModule>();
 

@@ -8,9 +8,11 @@ class UserModel  extends ResultUserModel{
   String email;
   String password;
   Map address;
+  List favorites;
   String phoneNumber;
   UserModel({
      this.name,
+     this.favorites,
      this.email,
      this.password,
      this.address,
@@ -23,6 +25,7 @@ class UserModel  extends ResultUserModel{
       'email': email,
       'password': password,
       'address': address,
+      'favorites':favorites,
       'phoneNumber':phoneNumber
     };
   }
@@ -31,6 +34,7 @@ class UserModel  extends ResultUserModel{
     return UserModel(
       name: map['name'] ?? '',
       email: map['email'] ?? '',
+      favorites: map['favorites'] ?? [],
       password: map['password'] ?? '',
       address: map['address'] ?? {},
       phoneNumber: map['phoneNumber'] ?? ''

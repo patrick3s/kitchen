@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:multidelivery/app/app_module.dart';
-import 'package:multidelivery/app/views/error/error.dart';
+import 'package:multidelivery/app/common/error.dart';
 import 'package:multidelivery/app/views/order/widgets/address.dart';
 import 'package:multidelivery/app/views/order/widgets/evaluation.dart';
 import 'package:multidelivery/app/views/order/widgets/header.dart';

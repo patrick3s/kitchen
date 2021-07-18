@@ -59,11 +59,12 @@ class TabsMain extends StatelessWidget {
                  
                   presenter.controller.categoryIndex = state.value;
                   Future.delayed(Duration.zero).then((value) => presenter?.controller?.formPartners?.currentState?.didChange(state.value));
-                  return ListView(
+                  return SingleChildScrollView(
                     physics: presenter.controller.categoryIndex != -1 ? NeverScrollableScrollPhysics() : null,
                     scrollDirection: Axis.horizontal,
                     controller: controller,
-                    children: [
+                    child: Row(
+                     children: [
                       ...List.generate(presenter.controller.categories.length,
                        (index){
                          
@@ -144,6 +145,7 @@ class TabsMain extends StatelessWidget {
                            );
                        }).toList()
                     ],
+                    ),
                   );
                 }
               ),

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:multidelivery/app/views/error/error.dart';
+import 'package:multidelivery/app/common/error.dart';
 import 'package:multidelivery/app/views/home/pages/orders/widgets/appbar.dart';
 import 'package:multidelivery/app/views/home/pages/orders/widgets/order_tile.dart';
 import 'package:multidelivery/shared/auth/auth_user.dart';

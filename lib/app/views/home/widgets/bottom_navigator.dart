@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:multidelivery/app/common/delegate.dart';
 
 import 'package:multidelivery/controllers/home.dart';
 import 'package:multidelivery/app/views/home/widgets/floating_button.dart';
@@ -64,8 +65,10 @@ class CustomBottomNav extends StatelessWidget {
                       Container(
                         width: size.width * .2,
                       ),
-                      _tileIcon(IconsPlatform.notification, 2, page),
-                      _tileIcon(IconsPlatform.person, 3, page)
+                      _tileIcon(IconsPlatform.search, 3, page,onTap: (){
+                        showSearch(context: context, delegate: CustomSearchDelegate());
+                      }),
+                      _tileIcon(IconsPlatform.person, 2, page)
                     ],
                   ),
                 ),
@@ -78,10 +81,10 @@ class CustomBottomNav extends StatelessWidget {
     );
   }
 
-  _tileIcon(IconData icon , int page, int currentPage){
+  _tileIcon(IconData icon , int page, int currentPage , {Function onTap}){
     final pageActivate = page == currentPage;
     return IconButton(
-                    onPressed: (){
+                    onPressed: onTap ?? (){
                       controller.currentPage.value =page;
                     }, icon: Icon(
                     icon,

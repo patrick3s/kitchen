@@ -1,6 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:multidelivery/app/app_module.dart';
+import 'package:multidelivery/blocs/usermodel.dart';
 import 'package:multidelivery/presenters/partner.dart';
 import 'package:multidelivery/shared/icons_platform.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -88,9 +91,23 @@ class AppBarPartner extends StatelessWidget {
               duration: Duration(seconds:1),
               child: IgnorePointer(
                 ignoring: !presenter.controller.tabActivate,
-                child: IconButton(onPressed: (){
-                  
-                }, icon: Icon(Icons.favorite))),
+                child: StreamBuilder<UserModelState>(
+                  stream: AppModule.to<BlocUsermodel>().stream,
+                  builder: (context, snapshot) {
+                    if(snapshot.data is LoadingUserModel){
+                      return Center(
+                        child: SpinKitThreeBounce(color: Colors.deepOrange,
+                        size: 26,
+                        ),
+                      );
+                    }
+                    return IconButton(onPressed: presenter.favorite,
+                     icon: Icon(Icons.favorite,
+                    color: presenter.controller.auth.userModel.favorites
+                    .contains(presenter.controller.partner.id) ? Colors.deepOrange : Colors.grey,
+                    ));
+                  }
+                )),
             )
           ],
         ),

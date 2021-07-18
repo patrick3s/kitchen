@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:multidelivery/app/app_module.dart';
 import 'package:multidelivery/controllers/home.dart';
 import 'package:multidelivery/app/views/home/pages/main/main.dart';
-import 'package:multidelivery/app/views/home/pages/notifications/notifications.dart';
 import 'package:multidelivery/app/views/home/pages/orders/orders.dart';
 import 'package:multidelivery/app/views/home/pages/profile/profile.dart';
 import 'package:multidelivery/app/views/home/widgets/bottom_navigator.dart';
@@ -48,7 +47,6 @@ class _HomeState extends State<Home> {
                     children:[
                       Main(),
                       Orders(),
-                      Notifications(),
                       Profile()
                     ],
                   ),
