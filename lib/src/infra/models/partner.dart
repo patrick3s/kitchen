@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:multidelivery/src/domain/entities/partner.dart';
 import 'package:multidelivery/src/infra/models/category.dart';
 import 'package:multidelivery/src/infra/models/product.dart';
+import 'package:multidelivery/src/infra/models/schedule.dart';
 
 class Partner extends ResultPartner {
   final String id;
@@ -21,6 +22,7 @@ class Partner extends ResultPartner {
   final String phoneNumber;
   final bool delivery;
   final bool isOpen;
+  final ScheduleOrder scheduleOrder;
   final String deliveryTime;
   final double deliveryPrice;
   final DateTime createAt;
@@ -35,6 +37,7 @@ class Partner extends ResultPartner {
      this.city,
      this.debit,
      this.credit,
+     this.scheduleOrder,
      this.uf,
      this.isOpen,
      this.district,
@@ -83,6 +86,7 @@ class Partner extends ResultPartner {
       'description': description,
       'categories': categories?.map((x) => x.toMap())?.toList(),
       'products': products?.map((x) => x.toMap())?.toList(),
+      'scheduleOrder': scheduleOrder?.toMap()
     };
   }
 
@@ -111,6 +115,10 @@ class Partner extends ResultPartner {
       specialtyCategory: Category.fromMap(map['specialtyCategory']),
       description: map['description'],
       deliveryPrice: map['deliveryPrice'] + 0.0,
+      scheduleOrder: map['scheduleOrder'] != null ? ScheduleOrder.fromMap(map['scheduleOrder']) : ScheduleOrder(days: [],
+      intervals: [],
+      selectHour: null
+      ),
       categories: List<Category>.from(map['categories']?.map((x) => Category.fromMap(x))),
       products: [],
     );
@@ -124,4 +132,12 @@ class Partner extends ResultPartner {
   String toJson() => json.encode(toMap());
 
   factory Partner.fromJson(String source) => Partner.fromMap(json.decode(source));
+
+  String deliveryPriceFormat(){
+    if(!delivery || deliveryPrice == 0.00){
+      return "Gratis";
+    }
+    return "R\$"+deliveryPrice.toStringAsFixed(2).replaceAll('.', ',');
+  }
+
   }

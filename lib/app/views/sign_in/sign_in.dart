@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin_button/button_list.dart';
@@ -9,7 +8,6 @@ import 'package:multidelivery/presenters/signin.dart';
 import 'package:multidelivery/shared/auth/auth_user.dart';
 import 'package:multidelivery/shared/config.dart';
 import 'package:multidelivery/shared/icons_platform.dart';
-
 import 'package:multidelivery/shared/pallete_colors.dart';
 import 'package:multidelivery/shared/validators.dart';
 

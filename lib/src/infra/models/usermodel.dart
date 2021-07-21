@@ -6,17 +6,21 @@ import 'package:multidelivery/src/domain/entities/usermodel.dart';
 class UserModel  extends ResultUserModel{
   String name;
   String email;
+  String lastName;
   String password;
   Map address;
   List favorites;
   String phoneNumber;
+  String birthday;
   UserModel({
      this.name,
      this.favorites,
      this.email,
+     this.lastName,
      this.password,
      this.address,
-     this.phoneNumber
+     this.phoneNumber,
+     this.birthday
   });
 
   Map<String, dynamic> toMap() {
@@ -26,7 +30,9 @@ class UserModel  extends ResultUserModel{
       'password': password,
       'address': address,
       'favorites':favorites,
-      'phoneNumber':phoneNumber
+      'phoneNumber':phoneNumber,
+      'lastName':lastName,
+      'birthday':birthday
     };
   }
 
@@ -36,7 +42,9 @@ class UserModel  extends ResultUserModel{
       email: map['email'] ?? '',
       favorites: map['favorites'] ?? [],
       password: map['password'] ?? '',
+      lastName: map['lastName'] ?? '',
       address: map['address'] ?? {},
+      birthday: map['birthday'] ?? '',
       phoneNumber: map['phoneNumber'] ?? ''
     );
   }

@@ -18,6 +18,10 @@ class PartnerPresenter {
     controller.listnerScrollBody((){_contract.refresh();});
   }
 
+  refresh(){
+    _contract.refresh();
+  }
+
   favorite(){
     final state =controller.favoriteParter();
     if(state is ErrorUserModel){

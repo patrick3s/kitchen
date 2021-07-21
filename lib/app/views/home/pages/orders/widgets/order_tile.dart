@@ -20,6 +20,7 @@ class OrderTile extends StatelessWidget {
       stream: FirebaseFirestore.instance.collection('partners').doc(doc['partnerId'])
       .collection('orders').doc(doc['orderId']).snapshots(),
       builder: (context, snapshot) {
+        
         Order order;
         switch(snapshot.connectionState){
           case ConnectionState.waiting:
@@ -34,6 +35,17 @@ class OrderTile extends StatelessWidget {
           order = Order.fromMap(snapshot.data.data()..['id']=snapshot.data.id);
           break;
         }
+        _schedule(){
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Text('Pedido agendado para ${order.scheduleOrder.title} no horário de ${order.scheduleOrder.selectHour.formatString()}' ,
+      style: TextStyle(
+        fontSize: size.width * .045,
+        color: Colors.brown
+      ),
+      ),
+    );
+  }
 
         if(snapshot.hasError){
           return Center(
@@ -50,6 +62,7 @@ class OrderTile extends StatelessWidget {
             child: Text('Desculpe houve um erro'),
           );
         }
+       // return Container();
         return InkWell(
           onTap: (){
             Modular.to.pushNamed('order', arguments: doc);
@@ -96,6 +109,14 @@ class OrderTile extends StatelessWidget {
                           ],
                         ),
                         Divider(),
+                        order.scheduleOrder.selectHour != null ? 
+                        Column(
+                          children: [
+                            _schedule(),
+                            Divider()
+                          ],
+                        )
+                        : Container(),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -174,8 +195,10 @@ class OrderTile extends StatelessWidget {
           ),
         );
       }
+      
     );
   }
+  
   _img(Order order, Size size){
     return Container(
       padding: EdgeInsets.all(5),

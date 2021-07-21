@@ -8,6 +8,7 @@ abstract class CartConfirmationContract {
   notification(text);
   confirmation();
   success(Order order);
+  refresh();
 }
 
 class CartConfirmationPresenter {
@@ -33,6 +34,9 @@ class CartConfirmationPresenter {
       _contract.success(order.order);
     }
     
+  }
+  refresh(){
+    _contract.refresh();
   }
  
 }

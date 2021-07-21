@@ -128,7 +128,7 @@ final utilEvaluation = {
   'partnerId':'MhdZmOqkcVPMznPUYMkX'
 };
 
-final weekdayList = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'];
+final weekdayList = ['Seg','Ter','Qua','Qui','Sex','Sab','Dom'];
 final monthList = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
 final lastStatus = 3;
 final listStats = ['Aguardando resposta','Seu pedido está sendo preparado','Seu pedido está indo até você','Pedido concluido'];

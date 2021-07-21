@@ -67,224 +67,230 @@ class _CartConfirmationState extends State<CartConfirmation> implements CartConf
         ),
         ),
       ),
-      body: FormField<FormPayment>(
-        initialValue: presenter.controller.cart.order.formPayment,
-        builder: (state) {
-          presenter.controller.cart.order.formPayment = state.value;
-          if(presenter.controller.cart.isEmpty){
+      body: ValueListenableBuilder(
+        valueListenable: presenter.controller.cart.isEmpty,
+        builder: (context,value,child) {
+          if(value){
             return Container();
           }
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListView(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(child: Text('Forma de pagamento',
-                      style: TextStyle(
-                        fontSize: size.width * .05,
-                        fontWeight: FontWeight.bold
-                      ),
-                      )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Obs: Todos os pagamentos são realizados na entrega do produto",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: size.width * .04
-                      ),
-                      ),
-                    ),
-                    ExpansionTile(title: Text('Cartão de crédito',
-                    style: TextStyle(
-                      fontSize: size.width * .04
-                    ),
-                    ),
-                    children: [
-                      if(presenter.controller.cart.order.partner.credit.isEmpty)...[
-                        Text("Este estabelecimento não aceita cartão de crédito",
-                        style: TextStyle(
-                          fontSize: size.width * .05,
-                        ),
-                        )
-                      ]else ...[
-                        ...presenter.controller.cart.order.partner.credit.map((e) => 
+          return FormField<FormPayment>(
+            initialValue: presenter.controller.cart.order.formPayment,
+            builder: (state) {
+              presenter.controller.cart.order.formPayment = state.value;
+              
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListView(
+                      children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: InkWell(
-                            onTap: (){
-                              state.didChange(FormPayment(
-                                name: 'cartão de crédito',
-                                type: 'credit',
-                                title: e,
-                                notThing: true
-                              ));
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children:[
-                                Icon(IconsPlatform.credit,
-                                size: state.value?.title == e ? size.width * .05 : size.width * .04,
-                                  color: state.value?.title == e ? Colors.deepOrange : Colors.grey
-                                ),
-                                Text(e,
-                                style: TextStyle(
-                                  fontSize: state.value?.title == e ? size.width * .05 : size.width * .04,
-                                  color: state.value?.title == e ? Colors.deepOrange : Colors.grey
-                                ),
-                                )
-                              ]
-                            ),
+                          child: Center(child: Text('Forma de pagamento',
+                          style: TextStyle(
+                            fontSize: size.width * .05,
+                            fontWeight: FontWeight.bold
                           ),
-                        )
-                        ).toList()
-                      ]
-                    ],
-                    ),
-                    ExpansionTile(title: Text('Cartão de Débito',
-                    style: TextStyle(
-                      fontSize: size.width * .04
-                    ),
-                    ),
-                    children: [
-                      if(presenter.controller.cart.order.partner.debit.isEmpty)...[
-                        Text("Este estabelecimento não aceita cartão de Débito",
-                        style: TextStyle(
-                          fontSize: size.width * .05,
+                          )),
                         ),
-                        )
-                      ]else ...[
-                        ...presenter.controller.cart.order.partner.debit.map((e) => 
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: InkWell(
-                            onTap: (){
-                              state.didChange(FormPayment(
-                                name: 'cartão de débito',
-                                type: 'debit',
-                                title: e,
-                                notThing: true
-                              ));
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children:[
-                                Icon(IconsPlatform.credit,
-                                size: state.value?.title == e ? size.width * .05 : size.width * .04,
-                                  color: state.value?.title == e ? Colors.deepOrange : Colors.grey
-                                ),
-                                Text(e,
-                                style: TextStyle(
-                                  fontSize: state.value?.title == e ? size.width * .05 : size.width * .04,
-                                  color: state.value?.title == e ? Colors.deepOrange : Colors.grey
-                                ),
-                                )
-                              ]
-                            ),
+                          child: Text("Obs: Todos os pagamentos são realizados na entrega do produto",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: size.width * .04
                           ),
-                        )
-                        ).toList()
-                      ]
-                    ],
-                    ),
+                          ),
+                        ),
+                        ExpansionTile(title: Text('Cartão de crédito',
+                        style: TextStyle(
+                          fontSize: size.width * .04
+                        ),
+                        ),
+                        children: [
+                          if(presenter.controller.cart.order.partner.credit.isEmpty)...[
+                            Text("Este estabelecimento não aceita cartão de crédito",
+                            style: TextStyle(
+                              fontSize: size.width * .05,
+                            ),
+                            )
+                          ]else ...[
+                            ...presenter.controller.cart.order.partner.credit.map((e) => 
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: (){
+                                  state.didChange(FormPayment(
+                                    name: 'cartão de crédito',
+                                    type: 'credit',
+                                    title: e,
+                                    notThing: true
+                                  ));
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children:[
+                                    Icon(IconsPlatform.credit,
+                                    size: state.value?.title == e ? size.width * .05 : size.width * .04,
+                                      color: state.value?.title == e ? Colors.deepOrange : Colors.grey
+                                    ),
+                                    Text(e,
+                                    style: TextStyle(
+                                      fontSize: state.value?.title == e ? size.width * .05 : size.width * .04,
+                                      color: state.value?.title == e ? Colors.deepOrange : Colors.grey
+                                    ),
+                                    )
+                                  ]
+                                ),
+                              ),
+                            )
+                            ).toList()
+                          ]
+                        ],
+                        ),
+                        ExpansionTile(title: Text('Cartão de Débito',
+                        style: TextStyle(
+                          fontSize: size.width * .04
+                        ),
+                        ),
+                        children: [
+                          if(presenter.controller.cart.order.partner.debit.isEmpty)...[
+                            Text("Este estabelecimento não aceita cartão de Débito",
+                            style: TextStyle(
+                              fontSize: size.width * .05,
+                            ),
+                            )
+                          ]else ...[
+                            ...presenter.controller.cart.order.partner.debit.map((e) => 
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: (){
+                                  state.didChange(FormPayment(
+                                    name: 'cartão de débito',
+                                    type: 'debit',
+                                    title: e,
+                                    notThing: true
+                                  ));
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children:[
+                                    Icon(IconsPlatform.credit,
+                                    size: state.value?.title == e ? size.width * .05 : size.width * .04,
+                                      color: state.value?.title == e ? Colors.deepOrange : Colors.grey
+                                    ),
+                                    Text(e,
+                                    style: TextStyle(
+                                      fontSize: state.value?.title == e ? size.width * .05 : size.width * .04,
+                                      color: state.value?.title == e ? Colors.deepOrange : Colors.grey
+                                    ),
+                                    )
+                                  ]
+                                ),
+                              ),
+                            )
+                            ).toList()
+                          ]
+                        ],
+                        ),
 
-                    TextButton.icon(onPressed: (){
-                      state.didChange(FormPayment(
-                        name: 'dinheiro',
-                        title: 'money',
-                        type: 'real',
-                        notThing: false
-                        ));
-                    }, icon: Icon(IconsPlatform.money,
-                    size: state.value?.title == 'money' ?  size.width * .05 : size.width * .04,
-                    color: state.value?.title == 'money' ? Colors.deepOrange : Colors.grey
-                    ), label: Text('Pagar no dinheiro \$\$',
-                    style: TextStyle(
-                      fontSize: state.value?.title == 'money' ?  size.width * .05 : size.width * .04,
-                      color: state.value?.title == 'money' ? Colors.deepOrange : Colors.grey
-                    ),
-                    )),
-                    state.value?.title == 'money' ? Row(
-                      children: [
-                        Checkbox(
-                          activeColor: Colors.deepOrange,
-                          value: state.value?.notThing , 
-                        onChanged: (value){
-                          state.value.notThing = value;
-                          state.didChange(state.value);
-                        }),
-                        Text('Não precisa de troco',
+                        TextButton.icon(onPressed: (){
+                          state.didChange(FormPayment(
+                            name: 'dinheiro',
+                            title: 'money',
+                            type: 'real',
+                            notThing: false
+                            ));
+                        }, icon: Icon(IconsPlatform.money,
+                        size: state.value?.title == 'money' ?  size.width * .05 : size.width * .04,
+                        color: state.value?.title == 'money' ? Colors.deepOrange : Colors.grey
+                        ), label: Text('Pagar no dinheiro \$\$',
                         style: TextStyle(
-                          fontSize: size.width * .045
+                          fontSize: state.value?.title == 'money' ?  size.width * .05 : size.width * .04,
+                          color: state.value?.title == 'money' ? Colors.deepOrange : Colors.grey
                         ),
-                        )
-                      ],
-                    ) : Container(),
-                    state.value?.notThing == false ? TextFormField(
-                      controller: presenter.controller.fieldController,
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.deepOrange)),
-                        labelText: 'Troco para quanto?',
-                        prefix: Text('R\$',
-                        style: TextStyle(
-                          fontSize:size.width * .04
-                        ),
-                        ),
-                        labelStyle: TextStyle(
-                          fontSize: size.width * .04,
-                          color: Colors.brown,
-                          fontWeight: FontWeight.bold
-                        ),
-                        border: OutlineInputBorder()),
-                    ):Container()
-                  ],
-                ),
-              )),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal:10),
-                height: size.height * .08,
-                child: Row(
-                  children: [
-                    Column(
-                      children: [
-                        Text('Total',style: TextStyle(
-                          fontSize: size.width * .05,
-                          fontWeight: FontWeight.bold
-                        ),),
-                        Text(presenter.controller.cart.order.totalPrice.toStringAsFixed(2).replaceAll('.', ','),
-                        style: TextStyle(
-                          fontSize: size.width * .05,
-                          
-                        ),
-                        )
+                        )),
+                        state.value?.title == 'money' ? Row(
+                          children: [
+                            Checkbox(
+                              activeColor: Colors.deepOrange,
+                              value: state.value?.notThing , 
+                            onChanged: (value){
+                              state.value.notThing = value;
+                              state.didChange(state.value);
+                            }),
+                            Text('Não precisa de troco',
+                            style: TextStyle(
+                              fontSize: size.width * .045
+                            ),
+                            )
+                          ],
+                        ) : Container(),
+                        state.value?.notThing == false ? TextFormField(
+                          controller: presenter.controller.fieldController,
+                          decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.deepOrange)),
+                            labelText: 'Troco para quanto?',
+                            prefix: Text('R\$',
+                            style: TextStyle(
+                              fontSize:size.width * .04
+                            ),
+                            ),
+                            labelStyle: TextStyle(
+                              fontSize: size.width * .04,
+                              color: Colors.brown,
+                              fontWeight: FontWeight.bold
+                            ),
+                            border: OutlineInputBorder()),
+                        ):Container()
                       ],
                     ),
-                    Expanded(child: Container(
-                      height: size.height * .065,
-                      padding: EdgeInsets.symmetric(horizontal:10),
-                      child: ElevatedButton(
-                        child: Text(state.value == null ?'Escolher forma de pagamento' : "Pagar no ${state.value.name}",
-                        style: TextStyle(
-                          fontSize: size.width * .04,
-                          fontWeight: FontWeight.bold
+                  )),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal:10),
+                    height: size.height * .08,
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Text('Total',style: TextStyle(
+                              fontSize: size.width * .05,
+                              fontWeight: FontWeight.bold
+                            ),),
+                            Text(presenter.controller.cart.order.totalPrice.toStringAsFixed(2).replaceAll('.', ','),
+                            style: TextStyle(
+                              fontSize: size.width * .05,
+                              
+                            ),
+                            )
+                          ],
                         ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.deepOrange
-                        ),
-                        onPressed: (){
-                          presenter.validation();
-                        },
-                        ),
-                    ))
-                  ],
-                ),
-              )
-            ],
+                        Expanded(child: Container(
+                          height: size.height * .065,
+                          padding: EdgeInsets.symmetric(horizontal:10),
+                          child: ElevatedButton(
+                            child: Text(state.value == null ?'Escolher forma de pagamento' : "Pagar no ${state.value.name}",
+                            style: TextStyle(
+                              fontSize: size.width * .04,
+                              fontWeight: FontWeight.bold
+                            ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.deepOrange
+                            ),
+                            onPressed: (){
+                              presenter.validation();
+                            },
+                            ),
+                        ))
+                      ],
+                    ),
+                  )
+                ],
+              );
+            }
           );
         }
       ),
@@ -308,5 +314,12 @@ class _CartConfirmationState extends State<CartConfirmation> implements CartConf
     'partnerId':order.partner.id
     });
 
+  }
+
+  @override
+  refresh() {
+    setState(() {
+      
+    });
   }
 }

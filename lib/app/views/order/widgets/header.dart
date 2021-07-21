@@ -38,6 +38,7 @@ class HeaderOrder extends StatelessWidget {
               )
             ],),
           ),
+          order.scheduleOrder.selectHour != null ? _schedule():Container(),
           Row(
             children: [
               Text(
@@ -92,6 +93,7 @@ class HeaderOrder extends StatelessWidget {
                 ],
               ),
             ):
+            order.status == 5 ? cancel():
             ExpansionTile(title: Text(listStats[order.status < listStats.length ? order.status : 3],
             style: TextStyle(
               fontSize: size.width * .045,
@@ -115,6 +117,30 @@ class HeaderOrder extends StatelessWidget {
           )
 
         ],
+      ),
+    );
+  }
+  _schedule(){
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Text('Pedido agendado para ${order.scheduleOrder.title} no horário de ${order.scheduleOrder.selectHour.formatString()}' ,
+      style: TextStyle(
+        fontSize: size.width * .045,
+        color: Colors.brown
+      ),
+      ),
+    );
+  }
+
+  cancel(){
+    return Container(
+      padding: EdgeInsets.all(10),
+      color: Colors.grey.withOpacity(.5),
+      child: Text('Seu pedido foi cancelado, Ligue para saber mais ${order.partner.phoneNumber}',
+      style: TextStyle(
+        fontSize: size.width * .045,
+        fontWeight: FontWeight.bold
+      ),
       ),
     );
   }

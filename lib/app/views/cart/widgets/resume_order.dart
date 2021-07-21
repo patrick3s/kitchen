@@ -41,7 +41,7 @@ class ResumeOrder extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 color: Colors.brown
               ),),
-              Text('R\$'+presenter.controller.cartModel.order.partner.deliveryPrice.toStringAsFixed(2).replaceAll('.', ','),
+              Text(presenter.controller.cartModel.order.deliveryFreeOrPaid(),
               style: TextStyle(
                 fontSize: size.width * .04,
                 fontWeight: FontWeight.bold,

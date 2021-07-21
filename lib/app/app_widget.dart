@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AppWidget extends StatelessWidget {
-  const AppWidget({ Key key }) : super(key: key);
+  const AppWidget({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,7 +14,9 @@ class AppWidget extends StatelessWidget {
       onGenerateRoute: Modular.generateRoute,
       theme: ThemeData(fontFamily: "Inconsolata"),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/', 
+      
+
+      initialRoute: '/',
     );
   }
 }

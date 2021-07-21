@@ -5,7 +5,7 @@ class CartController {
 
   CartController(this.cartModel);
   refresh(){
-    if(!cartModel.isEmpty)cartModel.refreshCart();
+    if(!cartModel.isEmpty.value)cartModel.refreshCart();
     
   }
 

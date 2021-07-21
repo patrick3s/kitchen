@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:multidelivery/app/app_module.dart';
+import 'package:multidelivery/app/common/schedule.dart';
 import 'package:multidelivery/presenters/partner.dart';
+import 'package:multidelivery/src/infra/models/cart.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class HeaderPartner extends StatelessWidget {
@@ -16,7 +19,14 @@ class HeaderPartner extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _tile(),
-         _detail()
+         _detail(),
+         ScheduleViewOrder(cart: AppModule.to<CartModel>(),
+         partner: presenter.controller.partner,
+         refresh: (){
+           Future.delayed(Duration.zero).then((value) => presenter.refresh());
+         },
+         size: size,
+         )
         ],
       ),
     );
@@ -92,7 +102,11 @@ class HeaderPartner extends StatelessWidget {
         _tileRow('⏰',presenter.controller.partner.deliveryTime),
         _tileRow(presenter.controller.partner.specialtyCategory.emoji,
          presenter.controller.partner.specialtyCategory.title),
-        _tileRow('🛵','${presenter.controller.partner.deliveryPrice == 0.0 ? "Entrega Grátis":"R\$${presenter.controller.partner.deliveryPrice.toStringAsFixed(2).replaceAll('.',',')}"}')
+        _tileRow('🛵',
+        AppModule.to<CartModel>().order.delivery ?
+        presenter.controller.partner.deliveryPriceFormat() :
+        "Grátis"
+        )
       ],
     );
   }

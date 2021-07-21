@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:multidelivery/blocs/usermodel.dart';
 import 'package:multidelivery/shared/auth/auth_user.dart';
 import 'package:multidelivery/shared/config.dart';
 import 'package:multidelivery/shared/icons_platform.dart';
@@ -16,10 +17,12 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   Size size;
+  BlocUsermodel bloc;
   @override
   void initState() {
     super.initState();
     AppModule.to<Config>().showLog('Profile Page iniciada');
+    bloc = AppModule.to<BlocUsermodel>();
   }
 
   @override
@@ -61,45 +64,56 @@ class _ProfileState extends State<Profile> {
   }
 
   _profile() {
-    return Container(
-      height: size.height * .1,
-      width: size.width,
-      decoration: BoxDecoration(
-          border:
-              Border(bottom: BorderSide(color: Colors.grey.withOpacity(.5)))),
-      padding: EdgeInsets.symmetric(horizontal: 15),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: size.height * .03,
-            backgroundColor: Colors.black12,
-            child: Icon(
-              IconsPlatform.person,
-              color: Colors.black,
-              size: size.width * .055,
+    return StreamBuilder<UserModelState>(
+      stream:bloc.stream ,
+      builder: (context, snapshot) {
+        
+        return InkWell(
+          onTap: (){
+            Modular.to.pushNamed('edit_profile');
+          },
+          child: Container(
+            height: size.height * .1,
+            width: size.width,
+            decoration: BoxDecoration(
+                border:
+                    Border(bottom: BorderSide(color: Colors.grey.withOpacity(.5)))),
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: size.height * .03,
+                  backgroundColor: Colors.black12,
+                  child: Icon(
+                    IconsPlatform.person,
+                    color: Colors.black,
+                    size: size.width * .055,
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      AppModule.to<AuthUser>().userModel.name,
+                      style: TextStyle(fontSize: size.width * .045),
+                    ),
+                    SizedBox(height: 3),
+                    Text(
+                      'Edite seu perfil',
+                      style:
+                          TextStyle(fontSize: size.width * .035, color: Colors.grey),
+                    )
+                  ],
+                )
+              ],
             ),
           ),
-          SizedBox(
-            width: 10,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                AppModule.to<AuthUser>().userModel.name,
-                style: TextStyle(fontSize: size.width * .045),
-              ),
-              SizedBox(height: 3),
-              Text(
-                'Edite seu perfil',
-                style:
-                    TextStyle(fontSize: size.width * .035, color: Colors.grey),
-              )
-            ],
-          )
-        ],
-      ),
+        );
+      }
     );
   }
 

@@ -71,44 +71,60 @@ class _CartState extends State<Cart>  implements CartContract{
               ],
         elevation: 0,
       ),
-      body: presenter.controller.cartModel.isEmpty ? CartEmpty(
-        size: size,
-      ): Column(
-        children: [
-          Expanded(
-            child: ListView(
-              children: [
-                DeliveryCart(
-                  size: size,
-                  cartModel: presenter.controller.cartModel,
+      body: ValueListenableBuilder<bool>(
+        valueListenable: presenter.controller.cartModel.isEmpty,
+        builder: (context,value,child) {
+          if(value){
+            return CartEmpty(
+              size: size,
+            );
+          }
+          return Column(
+            children: [
+              Expanded(
+                child: ListView(
+                  children: [
+                    DeliveryCart(
+                      size: size,
+                      cartModel: presenter.controller.cartModel,
+                      refresh: (){
+                        Future.delayed(Duration.zero).then((value) {
+                          presenter.controller.cartModel.refreshCart();
+                        setState(() {
+                          
+                        });
+                        });
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InfoPartner(
+                        size: size,
+                        presenter: presenter,
+                      ),
+                    ),
+                    ProductsCart(
+                      size: size,
+                      presenter: presenter,
+                    ),
+                    AddItem(
+                      size: size,
+                      presenter: presenter,
+                    ),
+                    ResumeOrder(
+                      size:size,
+                      presenter:presenter
+                    )
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InfoPartner(
-                    size: size,
-                    presenter: presenter,
-                  ),
-                ),
-                ProductsCart(
-                  size: size,
-                  presenter: presenter,
-                ),
-                AddItem(
-                  size: size,
-                  presenter: presenter,
-                ),
-                ResumeOrder(
-                  size:size,
-                  presenter:presenter
-                )
-              ],
-            ),
-          ),
-          ButtonResume(
-            size: size,
-            presenter: presenter,
-          )
-        ],
+              ),
+              ButtonResume(
+                size: size,
+                presenter: presenter,
+              )
+            ],
+          );
+        }
       )
     );
   }

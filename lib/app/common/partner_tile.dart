@@ -71,7 +71,7 @@ class PartnerTile extends StatelessWidget {
                               )
                             ],
                           ),
-                          Text("${partner.deliveryTime} ° ${partner.deliveryPrice == 0 ? "Entrega Gratis" : "R\$${partner.deliveryPrice.toStringAsFixed(2)}"} 🛵",
+                          Text("${partner.deliveryTime} ° ${partner.deliveryPriceFormat()} 🛵",
                           style: TextStyle(
                             fontSize: size.width * .03
                           ),

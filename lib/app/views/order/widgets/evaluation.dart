@@ -45,7 +45,14 @@ class EvaluationOrders extends StatelessWidget {
                   fontWeight: FontWeight.bold
                 ),
                 ),)
-              : Column(children: [
+              : 
+              order.status == 5 ? Text('Pedido Cancelado',
+              style: TextStyle(
+                fontSize: size.width * .045,
+                fontWeight: FontWeight.bold
+              ),
+              ):
+              Column(children: [
                 Text('Seu prazo de avaliação foi finalizado',
                 style: TextStyle(
                   fontSize:  size.width * .045,

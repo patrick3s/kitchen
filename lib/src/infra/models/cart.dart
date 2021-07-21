@@ -6,8 +6,12 @@ import 'package:multidelivery/src/infra/models/partner.dart';
 import 'package:multidelivery/src/infra/models/product.dart';
 
 class CartModel {
-  bool isEmpty = true;
-  Order order = Order(products: []);
+  ValueNotifier<bool> isEmpty = ValueNotifier(true);
+  int scheduleIndex = -1;
+  Order order = Order(products: [],
+  delivery: true,
+  scheduleOrder: Order.initSchedule()
+  );
   ValueNotifier<int> quantityItems = ValueNotifier(0);
 
   bool addProduct(Product product){
@@ -24,7 +28,7 @@ class CartModel {
         final newPartner = partners.list.firstWhere((element) => element.id.trim() == product.partnerId.trim());
         order.partner = Partner.fromMap(newPartner.toMap()..['products']=[]);
 
-        isEmpty = false;
+        isEmpty.value = false;
       }
     }
     
@@ -33,11 +37,15 @@ class CartModel {
     refreshCart();
     return true;
   }
+  
   clearCart(){
-    isEmpty =true;
+    isEmpty.value =true;
     quantityItems.value = 0;
+    scheduleIndex = -1;
     order = Order(products: [],
-    formPayment: null
+    formPayment: null,
+    delivery: true,
+    scheduleOrder: Order.initSchedule()
     );
   }
   removeProduct(Product product){
@@ -50,9 +58,14 @@ class CartModel {
     refreshCart();
   }
   refreshCart(){
+    if(order.products.isEmpty){
+      quantityItems.value = order.products.length;
+      order.subTotalPrice = 0.0;
+      order.totalPrice = 0.0;
+    }
     quantityItems.value = order.products.length;
     order.subTotalPrice = order.products.map((e) => e.totalPrice()).toList()
     .fold(0, (previousValue, element) => previousValue + element);
-    order.totalPrice = order.subTotalPrice + order.partner.deliveryPrice;
+    if(order.partner != null) order.totalPrice = order.subTotalPrice +  (order.delivery  ? order.partner.deliveryPrice : 0.0);
   }
 }

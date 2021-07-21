@@ -11,8 +11,8 @@ class PaymentOrder extends StatelessWidget {
     return Container(
       child: Column(
         children:[
- _row('subtotal', 'R\$'+order.subTotalPrice.toStringAsFixed(2).replaceAll('.', ','), false),
-          _row('Taxa de entrega', 'R\$'+order.partner.deliveryPrice.toStringAsFixed(2).replaceAll('.', ','), false),
+        _row('subtotal', 'R\$'+order.subTotalPrice.toStringAsFixed(2).replaceAll('.', ','), false),
+          _row('Taxa de entrega', order.deliveryFreeOrPaid(), false),
           _row('Total', 'R\$'+order.totalPrice.toStringAsFixed(2).replaceAll('.', ','), true),
           Divider(),
           Text('Pago no ${order.formPayment.name}',
