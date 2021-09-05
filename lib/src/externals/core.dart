@@ -1,3 +1,4 @@
+import 'package:multidelivery/src/domain/usecase/additional.dart';
 import 'package:multidelivery/src/domain/usecase/address.dart';
 import 'package:multidelivery/src/domain/usecase/category.dart';
 import 'package:multidelivery/src/domain/usecase/evaluation.dart';
@@ -16,6 +17,7 @@ UsecaseOffers usecaseOffers();
   UsecaseOrders useCaseOrdersImpl();
   UsecaseUserModel usecaseUserModel();
   UsecaseAddress usecaseAddress();
+  UsecaseAdditional usecaseAdditional();
 }
 
 class CoreImpl extends Core{
@@ -60,6 +62,11 @@ class CoreImpl extends Core{
   @override
   UsecaseAddress usecaseAddress() {
     return core.usecaseAddress();
+  }
+
+  @override
+  UsecaseAdditional usecaseAdditional() {
+    return core.usecaseAdditional();
   }
 
 

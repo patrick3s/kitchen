@@ -1,5 +1,6 @@
 
 import 'package:device_preview/device_preview.dart';
+// ignore: unused_import
 import 'package:flutter/foundation.dart';
 // ignore: implementation_imports
 import 'package:flutter/src/widgets/framework.dart';
@@ -9,6 +10,7 @@ import 'package:multidelivery/app/views/add_address/add_address.dart';
 import 'package:multidelivery/app/views/address/address.dart';
 import 'package:multidelivery/app/views/cart/cart.dart';
 import 'package:multidelivery/app/views/cart_confirmation/cart_confirmation.dart';
+import 'package:multidelivery/app/views/custom_product.dart/custom_product.dart';
 import 'package:multidelivery/app/views/edit_profile/edit_profile.dart';
 import 'package:multidelivery/app/views/evaluation/evaluation.dart';
 import 'package:multidelivery/app/views/favorites/favorites.dart';
@@ -17,6 +19,7 @@ import 'package:multidelivery/app/views/partner_evaluation/partner_evaluation.da
 import 'package:multidelivery/app/views/product/product.dart';
 import 'package:multidelivery/app/views/schedule/schedule.dart';
 import 'package:multidelivery/app/views/webview/webview.dart';
+import 'package:multidelivery/blocs/additional.dart';
 import 'package:multidelivery/blocs/offers.dart';
 import 'package:multidelivery/blocs/orders.dart';
 import 'package:multidelivery/blocs/partners.dart';
@@ -42,12 +45,13 @@ class AppModule extends MainModule {
     Bind((i) => FcmResource(i<Config>())),    
     Bind((i) =>HomeNavigator()),
     Bind((i) => CartModel()),
-    Bind((i) => AuthUser(i<Config>())),
+    Bind((i) => AuthUser(i<Config>(),i<CartModel>())),
     Bind((i) => BlocPartners(i<AuthUser>(), i<CoreImpl>().usecasePartners())),
     Bind((i) => BlocOrder(i<CoreImpl>().useCaseOrdersImpl(),i<AuthUser>())),
     Bind((i) => BlocUsermodel(i<AuthUser>(),i<CoreImpl>().usecaseUserModel())),
     Bind((i) => BlocOffers(i<AuthUser>(),
-    i<CoreImpl>().usecaseOffers()))
+    i<CoreImpl>().usecaseOffers())),
+    Bind((i) => BlocAdditional(i<CoreImpl>().usecaseAdditional()))
   ];
   @override 
   List<ModularRouter> routers = [
@@ -66,14 +70,16 @@ class AppModule extends MainModule {
     ModularRouter('/address',child: (_,args) => AddressView()),
     ModularRouter('/add_address',child: (_,args) => AddAddress()),
     ModularRouter('/edit_profile',child: (_,args) => EditProfile()),
-    ModularRouter('/schedule',child:(_,args) => ScheduleView(partner: args.data,))
+    ModularRouter('/schedule',child:(_,args) => ScheduleView(partner: args.data,)),
+    ModularRouter('/custom_product',child:(_,args) => CustomProduct(product: args.data,))
   ];
   static Inject get to => Inject<AppModule>();
 
   @override
   
   Widget get bootstrap => DevicePreview(
-    enabled: !kReleaseMode,
+    //enabled: !kReleaseMode,
+    enabled: false,
     builder: (_) => AppWidget(),
   );
 

@@ -34,6 +34,7 @@ class IconsPlatform {
   static IconData money = Platform.isAndroid ? Icons.attach_money : CupertinoIcons.money_dollar;
   static IconData delete = Platform.isAndroid ? Icons.delete : CupertinoIcons.delete;
   static IconData arrowForward = Platform.isAndroid ? Icons.arrow_forward_ios : CupertinoIcons.chevron_forward;
+  static IconData arrowBack = Platform.isAndroid ? Icons.arrow_back_ios : CupertinoIcons.chevron_back;
   static IconData exit = Platform.isAndroid ? Icons.exit_to_app : CupertinoIcons.power;
   static IconData coupons = Platform.isAndroid ? Icons.card_giftcard_rounded : CupertinoIcons.tickets;
   static IconData taskVerified = Platform.isAndroid ? Icons.task_alt_outlined : CupertinoIcons.checkmark_seal;

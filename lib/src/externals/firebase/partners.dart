@@ -9,6 +9,7 @@ class FirebasePartners extends DatasourcePartners{
     final partnerInFirebase = await _db.collection('partners').
     where('city',isEqualTo: city['city']).
     where('uf',isEqualTo: city['uf']).
+    where('activate',isEqualTo: true).
     get();
     return partnerInFirebase.docs.map((e) => Partner.fromMap(e.data()..['id'] = e.id)).toList();
   }

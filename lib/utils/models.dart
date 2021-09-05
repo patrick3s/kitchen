@@ -2,6 +2,8 @@
 
 
 
+import 'package:flutter/material.dart';
+
 final utilPartner = <String,dynamic>{
   'name':"Steak",
   'city':'Águia Branca',
@@ -131,4 +133,83 @@ final utilEvaluation = {
 final weekdayList = ['Seg','Ter','Qua','Qui','Sex','Sab','Dom'];
 final monthList = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
 final lastStatus = 3;
-final listStats = ['Aguardando resposta','Seu pedido está sendo preparado','Seu pedido está indo até você','Pedido concluido'];
+String listStats(int status, bool delivery){
+  if(status == 2 && !delivery){
+    return "Retire na loja";
+  }
+  final list = ['Aguardando resposta','Seu pedido está sendo preparado','Seu pedido está indo até você','Pedido concluido'];
+  return list[status];
+}
+
+final List<List<Offset>> positions = [
+  [
+    Offset(0.63,.2),
+    Offset(0.4,.3),
+    Offset(0.25,.25),
+    Offset(0.3,.43),
+    Offset(0.5,.65)
+  ],
+  [
+    Offset(0.35,.25),
+    Offset(0.45,.35),
+    Offset(0.6,.45),
+    Offset(0.25,.53),
+    Offset(0.5,.19)
+  ],
+  [
+    Offset(0.28,.28),
+    Offset(0.35,.48),
+    Offset(0.41,.35),
+    Offset(0.58,.53),
+    Offset(0.61,.65)
+  ],
+  [
+    Offset(0.25,.28),
+    Offset(0.3,.33),
+    Offset(0.46,.41),
+    Offset(0.6,.53),
+    Offset(0.52,.65)
+  ],
+  [
+    Offset(0.42,.38),
+    Offset(0.65,.42),
+    Offset(0.21,.28),
+    Offset(0.35,.53),
+    Offset(0.5,.65)
+  ],
+  [
+    Offset(0.515,.3),
+    Offset(0.6,.4),
+    Offset(0.46,.65),
+    Offset(0.3,.2),
+    Offset(0.2,.5)
+  ],
+  [
+    Offset(0.6,.3),
+    Offset(0.5,.4),
+    Offset(0.31,.5),
+    Offset(0.2,.7),
+    Offset(0.41,6.0)
+  ],
+[
+    Offset(0.41,.23),
+    Offset(0.5,.4),
+    Offset(0.3,.5),
+    Offset(0.25,.6),
+    Offset(0.6,.3)
+  ],
+[
+    Offset(0.3,.6),
+    Offset(0.6,.34),
+    Offset(0.41,.28),
+    Offset(0.5,.49),
+    Offset(0.21,0.5)
+  ],
+  [
+    Offset(0.3,.3),
+    Offset(0.5,.4),
+    Offset(0.4,.6),
+    Offset(0.6,.4),
+    Offset(0.25,.5)
+  ],
+];

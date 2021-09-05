@@ -7,6 +7,7 @@ import 'package:multidelivery/app/views/connection/connection.dart';
 import 'package:multidelivery/app/views/home/home.dart';
 import 'package:multidelivery/app/views/login/login.dart';
 import 'package:multidelivery/app/views/register/register.dart';
+import 'package:multidelivery/blocs/additional.dart';
 import 'package:multidelivery/resources/fcm.dart';
 import 'package:multidelivery/shared/auth/auth_user.dart';
 import 'package:multidelivery/shared/config.dart';
@@ -25,6 +26,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     AppModule.to<FcmResource>();
+    AppModule.to<BlocAdditional>();
     AppModule.to<Config>().showLog('Splash iniciado');
   }
   @override

@@ -104,7 +104,7 @@ class _SignInState extends State<SignIn> implements SigninContract {
                           text: "Entrar com Facebook",
                            onPressed: presenter.signInFacebook) : Container(),
                           Platform.isIOS ? SignInButton(Buttons.AppleDark, 
-                          text: "Entrar com a Apple",
+                          text: "Iniciar sessão com a Apple",
                           onPressed: presenter.signInApple) : Container()
                         ],
                       ),

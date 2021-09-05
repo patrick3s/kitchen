@@ -11,6 +11,7 @@ import 'package:multidelivery/shared/auth/facebook_sign.dart';
 import 'package:multidelivery/shared/auth/google_sign.dart';
 import 'package:multidelivery/shared/config.dart';
 import 'package:multidelivery/src/domain/erros/auth.dart';
+import 'package:multidelivery/src/infra/models/cart.dart';
 import 'package:multidelivery/src/infra/models/usermodel.dart';
 
 
@@ -27,8 +28,8 @@ class AuthUser {
   final _facebook = FacebookSignInAuth();
   UserModel userModel;
   final Config config;
-  
-  AuthUser(this.config){
+  final CartModel _cart;
+  AuthUser(this.config,this._cart){
     config.showLog('AuthUser iniciado');
     
     _loadUser();
@@ -39,6 +40,7 @@ class AuthUser {
     userModel = null;
     await _googleSign.signout();
     await _facebook.singout();
+    _cart.clearCart();
     status.value = STATUSUSER.UNLOGGED;
   }
   signinGoogle()async{

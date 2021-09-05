@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:418579369479:android:7dcde1be49bb14fc7824a2",
+        "mobilesdk_app_id": "1:418579369479:android:826edb21bb7432977824a2",
         "android_client_info": {
-          "package_name": "com.example.multidelivery"
+          "package_name": "com.eaglesoftware.multidelivery"
         }
       },
       "oauth_client": [
@@ -29,6 +29,85 @@
             {
               "client_id": "418579369479-ct20eis3611mnn10kc4k1egak39vthuq.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "418579369479-3jam2lcfhdec1ds8mg3jgk40t8j1an2l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kitchencheff"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418579369479:android:91ad624713db236b7824a2",
+        "android_client_info": {
+          "package_name": "com.example.kitchen_cheff"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418579369479-ct20eis3611mnn10kc4k1egak39vthuq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWra6SRMDjZOetSSaX-cbENeEc22Bg9AY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418579369479-ct20eis3611mnn10kc4k1egak39vthuq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "418579369479-3jam2lcfhdec1ds8mg3jgk40t8j1an2l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kitchencheff"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418579369479:android:118048430d9124997824a2",
+        "android_client_info": {
+          "package_name": "com.example.pref"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418579369479-ct20eis3611mnn10kc4k1egak39vthuq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWra6SRMDjZOetSSaX-cbENeEc22Bg9AY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418579369479-ct20eis3611mnn10kc4k1egak39vthuq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "418579369479-3jam2lcfhdec1ds8mg3jgk40t8j1an2l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kitchencheff"
+              }
             }
           ]
         }

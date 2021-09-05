@@ -17,12 +17,13 @@ class Orders extends StatefulWidget {
 
 class _OrdersState extends State<Orders> {
   Size size;
-  
+  Stream<QuerySnapshot<Map<String, dynamic>>> stream;
   @override
   void initState() {
     super.initState();
     
-    
+    stream = FirebaseFirestore.instance.collection('users').doc(AppModule.to<AuthUser>().user.uid)
+        .collection('orders').orderBy('createAt',descending: true).limit(3).snapshots();
     AppModule.to<Config>().showLog('Orders Page iniciada');
   }
   @override
@@ -32,6 +33,7 @@ class _OrdersState extends State<Orders> {
   }
   @override
   void dispose() {
+    
     super.dispose();
     
     AppModule.to<Config>().showLog('Orders Page destruida');
@@ -42,8 +44,7 @@ class _OrdersState extends State<Orders> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: FirebaseFirestore.instance.collection('users').doc(AppModule.to<AuthUser>().user.uid)
-        .collection('orders').orderBy('createAt',descending: true).snapshots(),
+        stream: stream,
         builder: (context, snapshot) {
           switch(snapshot.connectionState){
             case ConnectionState.waiting:

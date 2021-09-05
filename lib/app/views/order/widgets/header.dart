@@ -94,16 +94,16 @@ class HeaderOrder extends StatelessWidget {
               ),
             ):
             order.status == 5 ? cancel():
-            ExpansionTile(title: Text(listStats[order.status < listStats.length ? order.status : 3],
+            ExpansionTile(title: Text(listStats(order.status < 4 ? order.status : 3,order.delivery),
             style: TextStyle(
               fontSize: size.width * .045,
               fontWeight: FontWeight.bold
             ),
             ),
             children: [
-              ...List.generate(listStats.length, (index) {
+              ...List.generate(4, (index) {
                 if( index < order.status){
-                  return Text(listStats[index],
+                  return Text(listStats(index,order.delivery),
                   style: TextStyle(
                     fontSize: size.width * .045,
                     color: Colors.grey

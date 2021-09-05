@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:multidelivery/shared/icons_platform.dart';
 import 'package:multidelivery/src/infra/models/product.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -63,7 +64,27 @@ HeaderProduct({ Key key ,this.product,this.size}) : super(key: key);
                 )
               ],
             ),
-          )
+          ),
+          product.custom ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(child: TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(color:Colors.deepOrange),
+                  borderRadius: BorderRadius.all(Radius.circular(10))
+                )
+              ),
+              onPressed: (){
+                Modular.to.pushNamed('custom_product',arguments: product);
+              }, child: Text('Monte sua pizza 🍕',
+              style: TextStyle(
+                color: Colors.deepOrange,
+                fontSize: size.width * .045,
+                fontWeight: FontWeight.bold
+                
+              ),
+              ))),
+          ) : Container()
         ],
       ),
     );

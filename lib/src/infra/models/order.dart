@@ -104,8 +104,8 @@ class Order extends ResultOrder {
   }
 
   String statusTextOrder(){
-    if(status < lastStatus) return listStats[status];
-    if(status >= lastStatus && status <= lastStatus+1 ) return listStats[lastStatus];
+    if(status < lastStatus) return listStats(status,delivery);
+    if(status >= lastStatus && status <= lastStatus+1 ) return listStats(lastStatus,delivery);
     return "Cancelado";
   }
 

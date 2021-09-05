@@ -26,14 +26,18 @@ class Product extends ResultProduct{
   final Category category;
   final bool custom;
   String comment ='';
+  final List sizes;
+  int size;
   int quantity = 1;
   List<Complement> complements =[];
   Product({
      this.id,
      this.name,
      this.img,
+     this.sizes,
      this.custom,
      this.category,
+     this.size,
      this.complements,
      this.price,
      this.listAdditional,
@@ -49,9 +53,11 @@ class Product extends ResultProduct{
       'id': id,
       'name': name,
       'price': price,
+      'size':size ?? 0,
       'img':img,
       'custom':custom,
       'comment':comment,
+      'sizes':sizes ?? [],
       'quantity':quantity,
       'partnerName': partnerName,
       'partnerId': partnerId,
@@ -75,6 +81,12 @@ class Product extends ResultProduct{
       custom: map['custom'] ?? false,
       partnerImg: map['partnerImg'],
       img: map['img'] ?? '',
+      sizes: map['sizes'] ?? [
+        {'title':'P','price':20,'size':0},
+        {'title':'M','price':27,'size':1},
+        {'title':'G','price':35,'size':2}
+        ] ,
+      size: map['size'] ?? 0,
       partnerBackgroundImg: map['partnerBackgroundImg'],
       complements: map['complements'] != null ? List<Complement>.from(map['complements']?.map((x) => Complement.fromMap(x))) : [],
       listAdditional: List<Additional>.from(map['listAdditional']?.map((x) => Additional.fromMap(x))),

@@ -29,18 +29,21 @@ class ProductController {
     product.complements.clear();
     Map<String,Complement> mapCategoryAndListAdditional ={};
     for(final additional in product.listAdditional){
-      if(!mapCategoryAndListAdditional.containsKey(additional.category)){
-        mapCategoryAndListAdditional[additional.category] = Complement(
-          additional.category,
+      final category = additional.category.isEmpty ? "Adicionais" : additional.category;
+      if(!mapCategoryAndListAdditional.containsKey(category)){
+        mapCategoryAndListAdditional[category] = Complement(
+          category,
           additional.mandatory,
           additional.limit,
           [],
           []
         );
       }
-      mapCategoryAndListAdditional[additional.category].additionals.add(additional);
+      mapCategoryAndListAdditional[category].additionals.add(additional);
+      
     }
     
     product.complements = mapCategoryAndListAdditional.values.map((e) => e).toList();
+
   }
 }

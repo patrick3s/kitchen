@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:multidelivery/src/domain/entities/additional.dart';
 
 class Additional extends ResultAdditional{
@@ -11,6 +12,7 @@ class Additional extends ResultAdditional{
   final bool mandatory;
   final String category;
   final String img;
+  List<Offset> positions = [];
   bool checkBox;
    int quantity;
   Additional({
@@ -43,7 +45,7 @@ class Additional extends ResultAdditional{
     return Additional(
       title: map['title'],
       limit: map['limit'] ?? 0,
-      category: map['category'] ?? 'Complemento',
+      category: map['category'] ?? '',
       free:map['price'] == 0.0,
       checkBox: map['limit'] == 1,
       img: map['img'] ?? '',
@@ -52,6 +54,10 @@ class Additional extends ResultAdditional{
       description: map['description'],
      price: map['price'] != null ? map['price'] +0.0:0.0,
     );
+  }
+
+  bool compare(Additional ingredient){
+    return this.img == ingredient.img;
   }
 
   String toJson() => json.encode(toMap());

@@ -10,10 +10,7 @@ class ScheduleController {
   ScheduleController(this.cart,this.partner);
   checkDate(DateTime date){
     final today = DateTime.now();
-    final diferenceInDays = date.difference(today).inHours;
-    if(diferenceInDays > 24){
-      return false;
-    }
+    
     if(date.day == today.day){
       cart.scheduleIndex = -1;
       

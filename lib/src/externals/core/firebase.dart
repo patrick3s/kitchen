@@ -1,3 +1,4 @@
+import 'package:multidelivery/src/domain/usecase/additional.dart';
 import 'package:multidelivery/src/domain/usecase/address.dart';
 import 'package:multidelivery/src/domain/usecase/category.dart';
 import 'package:multidelivery/src/domain/usecase/evaluation.dart';
@@ -7,6 +8,7 @@ import 'package:multidelivery/src/domain/usecase/partners.dart';
 import 'package:multidelivery/src/domain/usecase/product.dart';
 import 'package:multidelivery/src/domain/usecase/usermodel.dart';
 import 'package:multidelivery/src/externals/core.dart';
+import 'package:multidelivery/src/externals/firebase/additional.dart';
 import 'package:multidelivery/src/externals/firebase/address.dart';
 import 'package:multidelivery/src/externals/firebase/category.dart';
 import 'package:multidelivery/src/externals/firebase/evaluation.dart';
@@ -15,6 +17,7 @@ import 'package:multidelivery/src/externals/firebase/order.dart';
 import 'package:multidelivery/src/externals/firebase/partners.dart';
 import 'package:multidelivery/src/externals/firebase/product.dart';
 import 'package:multidelivery/src/externals/firebase/usermodel.dart';
+import 'package:multidelivery/src/infra/repositories/additional.dart';
 import 'package:multidelivery/src/infra/repositories/address.dart';
 import 'package:multidelivery/src/infra/repositories/category.dart';
 import 'package:multidelivery/src/infra/repositories/evaluation.dart';
@@ -74,6 +77,13 @@ class CoreFirebase extends Core {
     final datasource = FirebaseAddress();
     final repository = RepositoryAddressImple(datasource);
     return UsecaseAddressImpl(repository);
+  }
+
+  @override
+  UsecaseAdditional usecaseAdditional() {
+    final datasource = FirebaseAdditional();
+    final repository = RepositoryAdditionalImpl(datasource);
+    return UsecaseAdditionalImpl(repository);
   }
   
 }

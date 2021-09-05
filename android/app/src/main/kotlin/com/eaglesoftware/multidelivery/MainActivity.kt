@@ -1,4 +1,4 @@
-package com.example.multidelivery
+package com.eaglesoftware.multidelivery
 
 import io.flutter.embedding.android.FlutterActivity
 

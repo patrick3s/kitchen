@@ -23,6 +23,7 @@ class ResultProduct {
      this.name,
      this.category,
      this.img,
+
      this.price,
      this.custom,
      this.listAdditional,
